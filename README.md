@@ -10,10 +10,11 @@
 - php8.0 $(which composer) install
 - php artisan sail:install. Select mysql
 - Create alias for sail shortcut. alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
-- Optional rebuild sail. docker compose down. sail build --no-cache
+- Optional rebuild sail. sail down. sail build --no-cache
 - Run sail in detached mode. sail up -d
 - sail artisan migrate
-- php artisan ui react
+- php artisan ui react --auth
+- sail composer install
 - sail npm install
 - Open http://localhost or http://127.0.0.1
 
