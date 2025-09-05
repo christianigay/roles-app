@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import MainContent from "./components/MainContent";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const App: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -19,6 +20,17 @@ const App: React.FC = () => {
           <Navbar toggleSidebar={toggleSidebar} />
           <MainContent />
         </div>
+        <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </Router>
   );

@@ -7,7 +7,7 @@ const UserAddPage: React.FC = () => {
   const history = useHistory();
 
   const handleSubmit = async (data: { name: string; email: string; roles: string[] }) => {
-    await axios.post("/api/users", data);
+    await axios.post("/api/users/add", data);
     history.push("/users");
   };
 

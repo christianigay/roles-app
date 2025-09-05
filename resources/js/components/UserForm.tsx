@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { _catchErrors } from "../utils/errorHandler";
+import { toast } from "react-toastify";
 
 interface UserFormProps {
   initialData?: {
@@ -42,14 +44,13 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
     try {
       await onSubmit(formData);
     } catch (err: any) {
-      setError(err.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} user`);
+			_catchErrors(err);
       setLoading(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-      {error && <p className="bg-red-400 text-white text-center px-6 py-3 mb-4 rounded-lg shadow-md">{error}</p>}
       <div className="mb-4">
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           Full Name
