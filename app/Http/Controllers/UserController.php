@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserAddRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,5 +13,10 @@ class UserController extends Controller
     {
         $users = User::all(['id', 'name', 'email']);
         return response()->json($users);
+    }
+
+    public function store(UserAddRequest $request)
+    {
+
     }
 }

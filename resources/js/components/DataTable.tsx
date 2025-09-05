@@ -20,7 +20,6 @@ interface DataTableProps<T extends { id: number | string; name?: string; title?:
 }
 
 const DataTable = <T extends { id: number | string; name?: string; title?: string }>({
-  hideFooter = false,
   tableData,
   onEditItem,
   onDeleteItem,
@@ -28,7 +27,6 @@ const DataTable = <T extends { id: number | string; name?: string; title?: strin
   children,
 }: DataTableProps<T>): JSX.Element => {
 
-  // Defensive checks for tableData
   if (!tableData || !tableData.headers || !tableData.tableItems) {
     return <div className="text-center text-grey-800">No data</div>;
   }

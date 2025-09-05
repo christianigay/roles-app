@@ -1,12 +1,14 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import UsersPage from "../pages/UsersPage";
+import UserAddPage from "../pages/UserAddPage";
 
 const MainContent: React.FC = () => {
   return (
     <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50">
       <Switch>
         <Route path="/users" component={UsersPage} />
+        <Route path="/user/add" component={UserAddPage} />
         
         <Route path="/" exact>
           <div className="text-center">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import DataTable from "../components/DataTable";
 
@@ -11,13 +12,13 @@ interface User {
 }
 
 const UsersPage: React.FC = () => {
+	const history = useHistory();
 	const [users, setUsers] = useState<User[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string | null>(null);
 	const [page, setPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(15);
 	const [totalItems, setTotalItems] = useState(0);
-
 	useEffect(() => {
 		const fetchUsers = async ()  => {
 			try {
@@ -44,7 +45,11 @@ const UsersPage: React.FC = () => {
 
 		fetchUsers();
 
-	}, []);
+	}, [page, itemsPerPage]);
+
+	const handleAddUser = () => {
+    history.push("/user/add");
+  };
 
 	const handleEditItem = (item: User) => {
 		console.log("Edit user:", item);
@@ -75,9 +80,19 @@ const UsersPage: React.FC = () => {
 		return <p className="text-center text-red-500">{error}</p>;
 	}
 
+	
+
 	return (
 		<div className="max-w-6xl mx-auto">
-			<h1 className="text-2xl font-bold mb-4">Users</h1>
+			<div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Users</h1>
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          onClick={handleAddUser}
+        >
+          Add User
+        </button>
+      </div>
 			<DataTable
 				tableData={tableData}
 				onEditItem={handleEditItem}
