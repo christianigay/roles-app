@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom"
 import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import UsersPage from "./pages/UsersPage"
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import MainContent from "./components/MainContent";
+
 const App: React.FC = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const closeSidebar = () => setSidebarOpen(false);
+
   return (
     <Router>
-      <div className="p-4">
-        <nav className="mb-4">
-          <Link to="/users" className="text-blue-500 hover:underline">Users</Link>
-        </nav>
+      <div className="min-h-screen bg-gray-100">
+        <Navbar toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
+        <div className="flex">
+          <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} />
+          <MainContent />
+        </div>
 
-        <Switch>
-          <Route path="/users" component={UsersPage}/>
-        </Switch>
       </div>
     </Router>
   );

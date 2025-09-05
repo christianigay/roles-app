@@ -36272,29 +36272,145 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _pages_UsersPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/UsersPage */ "./resources/js/pages/UsersPage.tsx");
+/* harmony import */ var _components_Navbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Navbar */ "./resources/js/components/Navbar.tsx");
+/* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Sidebar */ "./resources/js/components/Sidebar.tsx");
+/* harmony import */ var _components_MainContent__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/MainContent */ "./resources/js/components/MainContent.tsx");
+
+
 
 
 
 
 var App = function App() {
+  var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    sidebarOpen = _a[0],
+    setSidebarOpen = _a[1];
+  var toggleSidebar = function toggleSidebar() {
+    return setSidebarOpen(!sidebarOpen);
+  };
+  var closeSidebar = function closeSidebar() {
+    return setSidebarOpen(false);
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "p-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-    className: "mb-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-    to: "/users",
-    className: "text-blue-500 hover:underline"
-  }, "Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Route, {
-    path: "/users",
-    component: _pages_UsersPage__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }))));
+    className: "min-h-screen bg-gray-100"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    toggleSidebar: toggleSidebar,
+    sidebarOpen: sidebarOpen
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Sidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    isOpen: sidebarOpen,
+    closeSidebar: closeSidebar
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_MainContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
 };
 var root = document.getElementById("react-root");
 if (root) {
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(App, null), root);
 }
+
+/***/ }),
+
+/***/ "./resources/js/components/MainContent.tsx":
+/*!*************************************************!*\
+  !*** ./resources/js/components/MainContent.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/UsersPage */ "./resources/js/pages/UsersPage.tsx");
+
+
+
+var MainContent = function MainContent() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
+    className: "flex-1 pt-16 sm:ml-64"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
+    path: "/users",
+    component: _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
+    path: "/",
+    exact: true
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-3xl font-bold text-gray-900"
+  }, "Welcome"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    className: "mt-2 text-gray-600"
+  }, "Select an option from the menu."))))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainContent);
+
+/***/ }),
+
+/***/ "./resources/js/components/Navbar.tsx":
+/*!********************************************!*\
+  !*** ./resources/js/components/Navbar.tsx ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var Navbar = function Navbar(_a) {
+  var toggleSidebar = _a.toggleSidebar,
+    sidebarOpen = _a.sidebarOpen;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+    className: "bg-white shadow-sm fixed w-full z-10"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-between h-16"
+  })));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Navbar);
+
+/***/ }),
+
+/***/ "./resources/js/components/Sidebar.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/components/Sidebar.tsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+var Sidebar = function Sidebar(_a) {
+  var isOpen = _a.isOpen,
+    closeSidebar = _a.closeSidebar;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "".concat(isOpen ? "translate-x-0" : "translate-x-full", " sm:translate-x-0 fixed sm:static inset-y-0 left-0 w-64 bg-white shadow-md transform transition-transform duration-300 ease-in-out z-20 pt-16 sm:pt-0")
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "px-4 py-5 sm:p-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "text-lg font-semibold text-gray-900"
+  }, "Menu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mt-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/users",
+    onClick: closeSidebar,
+    className: "block py-2 px-4 text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-md"
+  }, "Users"))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Sidebar);
 
 /***/ }),
 
