@@ -36309,6 +36309,106 @@ if (root) {
 
 /***/ }),
 
+/***/ "./resources/js/components/DataTable.tsx":
+/*!***********************************************!*\
+  !*** ./resources/js/components/DataTable.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var DataTable = function DataTable(_a) {
+  var _b = _a.hideFooter,
+    hideFooter = _b === void 0 ? false : _b,
+    tableData = _a.tableData,
+    onEditItem = _a.onEditItem,
+    onDeleteItem = _a.onDeleteItem,
+    renderColumn = _a.renderColumn,
+    children = _a.children;
+  // Defensive checks for tableData
+  if (!tableData || !tableData.headers || !tableData.tableItems) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "text-center text-grey-800"
+    }, "No data");
+  }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "w-full"
+  }, children && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "mb-4"
+  }, children), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "overflow-x-auto border rounded-lg shadow-sm"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+    className: "min-w-full border-collapse"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", {
+    className: "bg-gray-100 text-sm text-gray-700"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, tableData.headers.map(function (col) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      key: col.key,
+      className: "px-4 py-2 text-left font-semibold cursor-pointer select-none"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "flex items-center gap-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, col.title)));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", {
+    className: "text-sm text-gray-800 divide-y divide-gray-200"
+  }, tableData.tableItems.length === 0 ? (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+    colSpan: tableData.headers.length,
+    className: "px-4 py-2 text-center"
+  }, "No data available"))) : tableData.tableItems.map(function (item) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+      key: item.id,
+      className: "hover:bg-gray-50"
+    }, tableData.headers.map(function (col) {
+      var _a;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+        key: col.key,
+        className: "px-4 py-2"
+      }, col.key !== "actions" ? renderColumn ? renderColumn(col.key, item) : (_a = item[col.key]) !== null && _a !== void 0 ? _a : "N/A" : (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "flex gap-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "p-1 text-blue-600 hover:text-blue-800",
+        onClick: function onClick() {
+          return onEditItem === null || onEditItem === void 0 ? void 0 : onEditItem(item);
+        },
+        "aria-label": "Edit ".concat((item === null || item === void 0 ? void 0 : item.name) || item.title || "item")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+        className: "h-5 w-5",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        strokeWidth: "2",
+        d: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "p-1 text-red-600 hover:text-red-800",
+        onClick: function onClick() {
+          return onDeleteItem === null || onDeleteItem === void 0 ? void 0 : onDeleteItem(item);
+        },
+        "aria-label": "Delete ".concat(item.name || item.title || "item")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+        className: "h-5 w-5",
+        fill: "none",
+        viewBox: "0 0 24 24",
+        stroke: "currentColor"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        strokeWidth: "2",
+        d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4M7 7h10m-9 3v8m4-8v8m4-8v8"
+      }))))));
+    }));
+  })))));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DataTable);
+
+/***/ }),
+
 /***/ "./resources/js/components/MainContent.tsx":
 /*!*************************************************!*\
   !*** ./resources/js/components/MainContent.tsx ***!
@@ -36477,6 +36577,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_DataTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/DataTable */ "./resources/js/components/DataTable.tsx");
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function (resolve) {
@@ -36594,6 +36695,7 @@ var __generator = undefined && undefined.__generator || function (thisArg, body)
 };
 
 
+
 var UsersPage = function UsersPage() {
   var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     users = _a[0],
@@ -36604,6 +36706,15 @@ var UsersPage = function UsersPage() {
   var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     error = _c[0],
     setError = _c[1];
+  var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1),
+    page = _d[0],
+    setPage = _d[1];
+  var _e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(15),
+    itemsPerPage = _e[0],
+    setItemsPerPage = _e[1];
+  var _f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    totalItems = _f[0],
+    setTotalItems = _f[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchUsers = function fetchUsers() {
       return __awaiter(void 0, void 0, void 0, function () {
@@ -36612,10 +36723,16 @@ var UsersPage = function UsersPage() {
           switch (_a.label) {
             case 0:
               _a.trys.push([0, 2,, 3]);
-              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/users")];
+              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/users", {
+                params: {
+                  page: page,
+                  per_page: itemsPerPage
+                }
+              })];
             case 1:
               response = _a.sent();
-              setUsers(response.data);
+              setUsers(response.data.data || []);
+              setTotalItems(response.data.total || 0);
               setLoading(false);
               return [3 /*break*/, 3];
             case 2:
@@ -36631,28 +36748,65 @@ var UsersPage = function UsersPage() {
     };
     fetchUsers();
   }, []);
+  var handleEditItem = function handleEditItem(item) {
+    console.log("Edit user:", item);
+  };
+  var handleDeleteItem = function handleDeleteItem(item) {
+    console.log("Delete user:", item);
+    // Implement delete logic (e.g., confirm dialog, API call)
+  };
+  var tableData = {
+    headers: [{
+      key: "id",
+      title: "ID",
+      sortable: true
+    }, {
+      key: "name",
+      title: "Name",
+      sortable: true
+    }, {
+      key: "email",
+      title: "Email",
+      sortable: true
+    }, {
+      key: "created_at",
+      title: "Created At",
+      sortable: true
+    }, {
+      key: "actions",
+      title: "Actions",
+      sortable: false
+    }],
+    tableItems: users
+  };
   if (loading) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Loading Users...");
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      className: "text-center text-gray-500"
+    }, "Loading Users...");
   }
   if (error) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-      className: "text-center text-gray-500"
+      className: "text-center text-red-500"
     }, error);
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "max-w-6xl mx-auto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "text-2xl font-bold mb-4"
-  }, "Users"), users.length === 0 ? (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "No users found.")) : (/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "space-y-2"
-  }, users.map(function (user) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
-      key: user.id,
-      className: "p-2 border rounded shadow-sm"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-      className: "font-semibold"
-    }, user.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-      className: "font-semibold"
-    }, user.email));
-  }))));
+  }, "Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_DataTable__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    tableData: tableData,
+    onEditItem: handleEditItem,
+    onDeleteItem: handleDeleteItem,
+    renderColumn: function renderColumn(key, item) {
+      if (key === "email") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          href: "mailto:".concat(item.email),
+          className: "text-blue-600"
+        }, item.email);
+      }
+      return item[key];
+    }
+  }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersPage);
 
