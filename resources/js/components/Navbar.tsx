@@ -2,31 +2,41 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface NavbarProps {
-    toggleSidebar: () => void;
-    sidebarOpen: boolean;
+  toggleSidebar: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ toggleSidebar, sidebarOpen}) => {
-    return (
-        <nav className="bg-white shadow-sm fixed w-full z-10">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    {/* <div className="flex">
-                        <div className="flex-shirink-0 flex items-center">
-                            <span className="text-2xl font-bold text-gray-800">Logo</span>
-                        </div>
-                        <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                            <Link 
-                            to="/users"
-                            className="border-b-2 border-transparent text-gray-600 hover:border-indigo-500 hover:text-indigo-600 px-1 pt-1 text-sm font-medium transition-colors">
-                                Users
-                            </Link>
-                        </div>
-                    </div> */}
-                </div>
-            </div>
-        </nav>
-    );
+const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
+  return (
+    <header className="bg-white shadow-sm">
+      <div className="max-w-7xl py-4 px-4 sm:px-6 flex justify-start">
+        
+        <div className="flex items-center gap-4">
+          <button
+            onClick={toggleSidebar}
+            className="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
+            aria-label="Toggle sidebar"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+        </div>
+				<Link to="/" className="block px-4">
+					<img src="/logo.png" alt="Logo" className="h-8" />
+        </Link >
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;

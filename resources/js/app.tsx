@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom"
-import {BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import MainContent from "./components/MainContent";
@@ -13,13 +13,12 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Navbar toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
-        <div className="flex">
-          <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} />
+      <div className="flex h-screen bg-gray-50 font-sans">
+        <Sidebar isOpen={sidebarOpen} closeSidebar={closeSidebar} />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Navbar toggleSidebar={toggleSidebar} />
           <MainContent />
         </div>
-
       </div>
     </Router>
   );

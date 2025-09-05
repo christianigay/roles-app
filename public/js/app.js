@@ -36292,15 +36292,14 @@ var App = function App() {
     return setSidebarOpen(false);
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "min-h-screen bg-gray-100"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    toggleSidebar: toggleSidebar,
-    sidebarOpen: sidebarOpen
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "flex"
+    className: "flex h-screen bg-gray-50 font-sans"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Sidebar__WEBPACK_IMPORTED_MODULE_4__["default"], {
     isOpen: sidebarOpen,
     closeSidebar: closeSidebar
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex-1 flex flex-col overflow-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    toggleSidebar: toggleSidebar
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_MainContent__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
 };
 var root = document.getElementById("react-root");
@@ -36329,9 +36328,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var MainContent = function MainContent() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
-    className: "flex-1 pt-16 sm:ml-64"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6"
+    className: "flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/users",
     component: _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -36344,7 +36341,7 @@ var MainContent = function MainContent() {
     className: "text-3xl font-bold text-gray-900"
   }, "Welcome"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "mt-2 text-gray-600"
-  }, "Select an option from the menu."))))));
+  }, "Select an option from the menu.")))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainContent);
 
@@ -36362,17 +36359,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 var Navbar = function Navbar(_a) {
-  var toggleSidebar = _a.toggleSidebar,
-    sidebarOpen = _a.sidebarOpen;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-    className: "bg-white shadow-sm fixed w-full z-10"
+  var toggleSidebar = _a.toggleSidebar;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+    className: "bg-white shadow-sm"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    className: "max-w-7xl py-4 px-4 sm:px-6 flex justify-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "flex justify-between h-16"
-  })));
+    className: "flex items-center gap-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: toggleSidebar,
+    className: "md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100",
+    "aria-label": "Toggle sidebar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    className: "h-6 w-6",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M4 6h16M4 12h16M4 18h16"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "/",
+    className: "block px-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: "/logo.png",
+    alt: "Logo",
+    className: "h-8"
+  }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Navbar);
 
@@ -36396,19 +36415,49 @@ __webpack_require__.r(__webpack_exports__);
 var Sidebar = function Sidebar(_a) {
   var isOpen = _a.isOpen,
     closeSidebar = _a.closeSidebar;
+  var handleLogout = function handleLogout() {
+    // Placeholder logout function (customize as needed)
+    console.log("Logout clicked");
+    closeSidebar();
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "".concat(isOpen ? "translate-x-0" : "translate-x-full", " sm:translate-x-0 fixed sm:static inset-y-0 left-0 w-64 bg-white shadow-md transform transition-transform duration-300 ease-in-out z-20 pt-16 sm:pt-0")
+    className: "bg-gradient-to-b from-blue-600 to-blue-800 text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform ".concat(isOpen ? "translate-x-0" : "-translate-x-full", " md:translate-x-0 md:static transition-transform duration-300 ease-in-out z-30")
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "px-4 py-5 sm:p-6"
+    className: "flex items-center justify-between px-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
-    className: "text-lg font-semibold text-gray-900"
-  }, "Menu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "mt-5"
+    className: "text-xl font-bold"
+  }, "Menu"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: closeSidebar,
+    className: "md:hidden text-white hover:text-gray-200",
+    "aria-label": "Close sidebar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    className: "h-6 w-6",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M6 18L18 6M6 6l12 12"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+    className: "mt-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/users",
+    className: "flex items-center gap-3 mt-6 py-2.5 px-4 rounded-lg hover:bg-blue-700 transition-colors data-[active=true]:bg-blue-700",
     onClick: closeSidebar,
-    className: "block py-2 px-4 text-sm text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 rounded-md"
-  }, "Users"))));
+    "aria-label": "Users"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+    className: "h-5 w-5",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    stroke: "currentColor"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    strokeWidth: "2",
+    d: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+  })), "Users")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Sidebar);
 
