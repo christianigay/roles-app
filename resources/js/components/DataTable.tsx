@@ -80,7 +80,7 @@ const DataTable = <T extends { id: number | string; name?: string; title?: strin
                               />
                             </svg>
                           </button>
-                          <button
+                          {/* <button
                             className="p-1 text-red-600 hover:text-red-800"
                             onClick={() => onDeleteItem?.(item)}
                             aria-label={`Delete ${item.name || item.title || "item"}`}
@@ -93,7 +93,7 @@ const DataTable = <T extends { id: number | string; name?: string; title?: strin
                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4M7 7h10m-9 3v8m4-8v8m4-8v8"
                               />
                             </svg>
-                          </button>
+                          </button> */}
                         </div>
                       )}
                     </td>

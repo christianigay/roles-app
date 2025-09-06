@@ -36851,22 +36851,6 @@ var DataTable = function DataTable(_a) {
         strokeLinejoin: "round",
         strokeWidth: "2",
         d: "M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "p-1 text-red-600 hover:text-red-800",
-        onClick: function onClick() {
-          return onDeleteItem === null || onDeleteItem === void 0 ? void 0 : onDeleteItem(item);
-        },
-        "aria-label": "Delete ".concat(item.name || item.title || "item")
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
-        className: "h-5 w-5",
-        fill: "none",
-        viewBox: "0 0 24 24",
-        stroke: "currentColor"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("path", {
-        strokeLinecap: "round",
-        strokeLinejoin: "round",
-        strokeWidth: "2",
-        d: "M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4M7 7h10m-9 3v8m4-8v8m4-8v8"
       }))))));
     }));
   })))));
