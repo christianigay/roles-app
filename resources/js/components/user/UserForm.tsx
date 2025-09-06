@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { _catchErrors } from "../../utils/errorHandler";
 import axios from "axios";
+import { UserData } from "./types/UserData";
 
 interface UserFormProps {
-  initialData?: {
-    id?: number;
-    name?: string;
-    email?: string;
-    roles?: number[];
-  };
+  initialData?: UserData;
   onSubmit: (data: { name: string; email: string; roles: number[] }) => Promise<void>;
   onCancel: () => void;
   isEdit?: boolean;
@@ -19,11 +15,11 @@ interface Role {
   name: string;
 }
 
-const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCancel, isEdit = false }) => {
+const UserForm: React.FC<UserFormProps> = ({ initialData, onSubmit, onCancel, isEdit = false }) => {
   const [formData, setFormData] = useState({
-    name: initialData.name || "",
-    email: initialData.email || "",
-    roles: initialData.roles || [],
+    name: initialData?.name || "",
+    email: initialData?.email || "",
+    roles: initialData?.roles || [],
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -58,13 +54,11 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
 
     try {
       await onSubmit(formData);
     } catch (err: any) {
 			_catchErrors(err);
-      setLoading(false);
     }
   };
 
@@ -147,7 +141,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
           className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50"
           disabled={loading}
         >
-          {loading ? (isEdit ? "Updating..." : "Creating...") : isEdit ? "Update User" : "Create User"}
+          {isEdit ? "Update User" : "Create User"}
         </button>
       </div>
     </form>

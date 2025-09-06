@@ -36890,6 +36890,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/UsersPage */ "./resources/js/pages/UsersPage.tsx");
 /* harmony import */ var _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/UserAddPage */ "./resources/js/pages/UserAddPage.tsx");
+/* harmony import */ var _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/UserEditPage */ "./resources/js/pages/UserEditPage.tsx");
+
 
 
 
@@ -36903,6 +36905,10 @@ var MainContent = function MainContent() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/user/add",
     component: _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
+    path: "/user/edit/:id",
+    exact: true,
+    component: _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/",
     exact: true
@@ -36988,7 +36994,6 @@ var Sidebar = function Sidebar(_a) {
     closeSidebar = _a.closeSidebar;
   var handleLogout = function handleLogout() {
     // Placeholder logout function (customize as needed)
-    console.log("Logout clicked");
     closeSidebar();
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -37187,28 +37192,27 @@ var __spreadArray = undefined && undefined.__spreadArray || function (to, from, 
 
 
 var UserForm = function UserForm(_a) {
-  var _b = _a.initialData,
-    initialData = _b === void 0 ? {} : _b,
+  var initialData = _a.initialData,
     onSubmit = _a.onSubmit,
     onCancel = _a.onCancel,
-    _c = _a.isEdit,
-    isEdit = _c === void 0 ? false : _c;
-  var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-      name: initialData.name || "",
-      email: initialData.email || "",
-      roles: initialData.roles || []
+    _b = _a.isEdit,
+    isEdit = _b === void 0 ? false : _b;
+  var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      name: (initialData === null || initialData === void 0 ? void 0 : initialData.name) || "",
+      email: (initialData === null || initialData === void 0 ? void 0 : initialData.email) || "",
+      roles: (initialData === null || initialData === void 0 ? void 0 : initialData.roles) || []
     }),
-    formData = _d[0],
-    setFormData = _d[1];
-  var _e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-    error = _e[0],
-    setError = _e[1];
-  var _f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-    loading = _f[0],
-    setLoading = _f[1];
-  var _g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-    availableRoles = _g[0],
-    setAvailableRoles = _g[1];
+    formData = _c[0],
+    setFormData = _c[1];
+  var _d = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    error = _d[0],
+    setError = _d[1];
+  var _e = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    loading = _e[0],
+    setLoading = _e[1];
+  var _f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    availableRoles = _f[0],
+    setAvailableRoles = _f[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchRoles = function fetchRoles() {
       return __awaiter(void 0, void 0, void 0, function () {
@@ -37263,7 +37267,6 @@ var UserForm = function UserForm(_a) {
           case 0:
             e.preventDefault();
             setError(null);
-            setLoading(true);
             _a.label = 1;
           case 1:
             _a.trys.push([1, 3,, 4]);
@@ -37274,7 +37277,6 @@ var UserForm = function UserForm(_a) {
           case 3:
             err_2 = _a.sent();
             (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__._catchErrors)(err_2);
-            setLoading(false);
             return [3 /*break*/, 4];
           case 4:
             return [2 /*return*/];
@@ -37348,7 +37350,7 @@ var UserForm = function UserForm(_a) {
     type: "submit",
     className: "px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50",
     disabled: loading
-  }, loading ? isEdit ? "Updating..." : "Creating..." : isEdit ? "Update User" : "Create User")));
+  }, isEdit ? "Update User" : "Create User")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserForm);
 
@@ -37524,6 +37526,248 @@ var UserAddPage = function UserAddPage() {
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserAddPage);
+
+/***/ }),
+
+/***/ "./resources/js/pages/UserEditPage.tsx":
+/*!*********************************************!*\
+  !*** ./resources/js/pages/UserEditPage.tsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _components_user_UserForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/user/UserForm */ "./resources/js/components/user/UserForm.tsx");
+/* harmony import */ var _utils_errorHandler__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils/errorHandler */ "./resources/js/utils/errorHandler.ts");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
+var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __generator = undefined && undefined.__generator || function (thisArg, body) {
+  var _ = {
+      label: 0,
+      sent: function sent() {
+        if (t[0] & 1) throw t[1];
+        return t[1];
+      },
+      trys: [],
+      ops: []
+    },
+    f,
+    y,
+    t,
+    g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+    while (g && (g = 0, op[0] && (_ = 0)), _) try {
+      if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+      if (y = 0, t) op = [op[0] & 2, t.value];
+      switch (op[0]) {
+        case 0:
+        case 1:
+          t = op;
+          break;
+        case 4:
+          _.label++;
+          return {
+            value: op[1],
+            done: false
+          };
+        case 5:
+          _.label++;
+          y = op[1];
+          op = [0];
+          continue;
+        case 7:
+          op = _.ops.pop();
+          _.trys.pop();
+          continue;
+        default:
+          if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            _ = 0;
+            continue;
+          }
+          if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            _.label = op[1];
+            break;
+          }
+          if (op[0] === 6 && _.label < t[1]) {
+            _.label = t[1];
+            t = op;
+            break;
+          }
+          if (t && _.label < t[2]) {
+            _.label = t[2];
+            _.ops.push(op);
+            break;
+          }
+          if (t[2]) _.ops.pop();
+          _.trys.pop();
+          continue;
+      }
+      op = body.call(thisArg, _);
+    } catch (e) {
+      op = [6, e];
+      y = 0;
+    } finally {
+      f = t = 0;
+    }
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+
+
+
+
+var UserEditPage = function UserEditPage() {
+  var history = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useHistory)();
+  var id = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useParams)().id;
+  var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    userData = _a[0],
+    setUserData = _a[1];
+  var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    loading = _b[0],
+    setLoading = _b[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchUser = function fetchUser() {
+      return __awaiter(void 0, void 0, void 0, function () {
+        var response, data, roles, err_1;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              _a.trys.push([0, 2, 3, 4]);
+              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/users/".concat(id, "/details"))];
+            case 1:
+              response = _a.sent();
+              data = response.data;
+              roles = data.roles.map(function (r) {
+                return r.id;
+              });
+              setUserData(__assign(__assign({}, data), {
+                roles: roles
+              }));
+              return [3 /*break*/, 4];
+            case 2:
+              err_1 = _a.sent();
+              (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_4__._catchErrors)(err_1);
+              return [3 /*break*/, 4];
+            case 3:
+              setLoading(false);
+              return [7 /*endfinally*/];
+            case 4:
+              return [2 /*return*/];
+          }
+        });
+      });
+    };
+    fetchUser();
+  }, [id]);
+  var handleSubmit = function handleSubmit(data) {
+    return __awaiter(void 0, void 0, void 0, function () {
+      var err_2;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            _a.trys.push([0, 2,, 3]);
+            return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/users/".concat(id, "/update"), data)];
+          case 1:
+            _a.sent();
+            history.push("/users");
+            return [3 /*break*/, 3];
+          case 2:
+            err_2 = _a.sent();
+            (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_4__._catchErrors)(err_2);
+            return [3 /*break*/, 3];
+          case 3:
+            return [2 /*return*/];
+        }
+      });
+    });
+  };
+  if (loading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-center p-4"
+  }, "Loading user...");
+  if (!userData) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-center p-4"
+  }, "User not found");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "max-w-6xl mx-auto p-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex justify-between items-center mb-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "text-2xl font-bold"
+  }, "Edit User"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700",
+    onClick: function onClick() {
+      return history.push("/users");
+    }
+  }, "Back to Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_user_UserForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    initialData: userData,
+    onSubmit: handleSubmit,
+    onCancel: function onCancel() {
+      return history.push("/users");
+    },
+    isEdit: true
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserEditPage);
 
 /***/ }),
 
@@ -37719,12 +37963,9 @@ var UsersPage = function UsersPage() {
     history.push("/user/add");
   };
   var handleEditItem = function handleEditItem(item) {
-    console.log("Edit user:", item);
+    history.push("/user/edit/".concat(item.id));
   };
-  var handleDeleteItem = function handleDeleteItem(item) {
-    console.log("Delete user:", item);
-    // Implement delete logic (e.g., confirm dialog, API call)
-  };
+  var handleDeleteItem = function handleDeleteItem(item) {};
   var tableData = {
     headers: [{
       key: "id",

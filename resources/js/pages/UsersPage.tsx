@@ -52,12 +52,11 @@ const UsersPage: React.FC = () => {
   };
 
 	const handleEditItem = (item: User) => {
-		console.log("Edit user:", item);
+		history.push(`/user/edit/${item.id}`);
 	};
 
 	const handleDeleteItem = (item: User) => {
-		console.log("Delete user:", item);
-		// Implement delete logic (e.g., confirm dialog, API call)
+		
 	};
 
 	const tableData = {

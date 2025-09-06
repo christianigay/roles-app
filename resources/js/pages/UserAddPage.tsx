@@ -6,6 +6,13 @@ import UserForm from "../components/user/UserForm";
 const UserAddPage: React.FC = () => {
   const history = useHistory();
 
+  interface UserData {
+    id: number;
+    name: string;
+    email: string;
+    roles: number[];
+  }
+
   const handleSubmit = async (data: { name: string; email: string; roles: number[] }) => {
     await axios.post("/api/users/add", data);
     history.push("/users");

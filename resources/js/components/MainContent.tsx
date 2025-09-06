@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import UsersPage from "../pages/UsersPage";
 import UserAddPage from "../pages/UserAddPage";
+import UserEditPage from "../pages/UserEditPage";
 
 const MainContent: React.FC = () => {
   return (
@@ -9,7 +10,8 @@ const MainContent: React.FC = () => {
       <Switch>
         <Route path="/users" component={UsersPage} />
         <Route path="/user/add" component={UserAddPage} />
-        
+         <Route path="/user/edit/:id" exact component={UserEditPage} />
+
         <Route path="/" exact>
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">Welcome</h1>
