@@ -36871,27 +36871,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/UsersPage */ "./resources/js/pages/UsersPage.tsx");
-/* harmony import */ var _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/UserAddPage */ "./resources/js/pages/UserAddPage.tsx");
-/* harmony import */ var _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/UserEditPage */ "./resources/js/pages/UserEditPage.tsx");
-
-
+/* harmony import */ var _routes_appRoutes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../routes/appRoutes */ "./resources/js/routes/appRoutes.ts");
 
 
 
 var MainContent = function MainContent() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
     className: "flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-gray-50"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/users",
-    component: _pages_UsersPage__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/user/add",
-    component: _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
-    path: "/user/edit/:id",
-    exact: true,
-    component: _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_4__["default"]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Switch, null, _routes_appRoutes__WEBPACK_IMPORTED_MODULE_2__.appRoutes.map(function (_a) {
+    var path = _a.path,
+      exact = _a.exact,
+      Component = _a.component;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
+      key: path,
+      path: path,
+      exact: exact,
+      component: Component
+    });
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: "/",
     exact: true
@@ -38064,6 +38060,37 @@ var UsersPage = function UsersPage() {
   }));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UsersPage);
+
+/***/ }),
+
+/***/ "./resources/js/routes/appRoutes.ts":
+/*!******************************************!*\
+  !*** ./resources/js/routes/appRoutes.ts ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   appRoutes: () => (/* binding */ appRoutes)
+/* harmony export */ });
+/* harmony import */ var _pages_UsersPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/UsersPage */ "./resources/js/pages/UsersPage.tsx");
+/* harmony import */ var _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/UserAddPage */ "./resources/js/pages/UserAddPage.tsx");
+/* harmony import */ var _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/UserEditPage */ "./resources/js/pages/UserEditPage.tsx");
+
+
+
+var appRoutes = [{
+  path: "/users",
+  component: _pages_UsersPage__WEBPACK_IMPORTED_MODULE_0__["default"]
+}, {
+  path: "/user/add",
+  component: _pages_UserAddPage__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
+  path: "/user/edit/:id",
+  component: _pages_UserEditPage__WEBPACK_IMPORTED_MODULE_2__["default"],
+  exact: true
+}];
 
 /***/ }),
 
