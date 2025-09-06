@@ -10,7 +10,7 @@ const MainContent: React.FC = () => {
       <Switch>
         <Route path="/users" component={UsersPage} />
         <Route path="/user/add" component={UserAddPage} />
-         <Route path="/user/edit/:id" exact component={UserEditPage} />
+        <Route path="/user/edit/:id" exact component={UserEditPage} />
 
         <Route path="/" exact>
           <div className="text-center">
