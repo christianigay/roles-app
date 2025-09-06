@@ -10,6 +10,11 @@ class UserRepository extends BaseRepository
         $this->setModel(User::class);
     }
 
+    public function saveRoles(User $user, array $roleIds)
+    {
+        return $user->roles()->sync($roleIds);
+    }
+
     public function search()
     {
         

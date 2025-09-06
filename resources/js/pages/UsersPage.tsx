@@ -28,11 +28,11 @@ const UsersPage: React.FC = () => {
 					per_page: number;
 					current_page: number;
 				}>("/api/users", {
-          params: {
-            page,
-            per_page: itemsPerPage,
-          },
-        });
+					params: {
+						page,
+						per_page: itemsPerPage,
+					},
+				});
 
 				setUsers(response.data.data || []);
 				setTotalItems(response.data.total || 0);

@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserAddRequest;
 use App\Models\User;
 use App\Repositories\RepositoryInterface;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     protected $repo;
 
-    public function __construct(RepositoryInterface $repo)
+    public function __construct(UserRepository $userRepo)
     {
-        $this->repo = $repo->setModel(User::class);
+        $this->repo = $userRepo;
     }
     
     public function index() 
@@ -25,7 +26,8 @@ class UserController extends Controller
     public function store(UserAddRequest $request)
     {
         $data = $request->validated();
-        $result = $this->repo->create($data);
-        return response()->json(['result' => $result], 201);
+        $user = $this->repo->create($data);
+        $this->repo->saveRoles($user, $request->roles);
+        return response()->json(['result' => $user], 201);
     }
 }

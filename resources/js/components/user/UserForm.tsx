@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { _catchErrors } from "../utils/errorHandler";
-import { toast } from "react-toastify";
+import { _catchErrors } from "../../utils/errorHandler";
+import axios from "axios";
 
 interface UserFormProps {
   initialData?: {
     id?: number;
     name?: string;
     email?: string;
-    roles?: string[];
+    roles?: number[];
   };
-  onSubmit: (data: { name: string; email: string; roles: string[] }) => Promise<void>;
+  onSubmit: (data: { name: string; email: string; roles: number[] }) => Promise<void>;
   onCancel: () => void;
   isEdit?: boolean;
+}
+
+interface Role {
+  id: number;
+  name: string;
 }
 
 const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCancel, isEdit = false }) => {
@@ -22,7 +27,21 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [availableRoles, setAvailableRoles] = useState<string[]>(["Author", "Editor", "Subscriber", "Administrator"]);
+  const [availableRoles, setAvailableRoles] = useState<Role[]>([]);
+
+
+  useEffect(() => {
+    const fetchRoles = async() => {
+      try {
+        const {data} = await axios.get('/roles');
+        setAvailableRoles(data.data)
+      } catch (err: any) {
+        _catchErrors(err);
+      }
+    }
+
+    fetchRoles();
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,7 +50,7 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
   };
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = Array.from(e.target.selectedOptions, (option) => option.value);
+    const selected = Array.from(e.target.selectedOptions, (option) => Number(option.value));
     setFormData((prev) => ({ ...prev, roles: selected }));
     setError(null);
   };
@@ -87,13 +106,13 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
           id="roles"
           name="roles"
           multiple
-          value={formData.roles}
+          value={formData.roles.map(String)}
           onChange={handleRoleChange}
           className="mt-1 block w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
         >
           {availableRoles.map((role) => (
-            <option key={role} value={role}>
-              {role}
+            <option key={role.id} value={role.id}>
+              {role.name}
             </option>
           ))}
         </select>

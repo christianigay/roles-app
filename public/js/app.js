@@ -37034,10 +37034,10 @@ var Sidebar = function Sidebar(_a) {
 
 /***/ }),
 
-/***/ "./resources/js/components/UserForm.tsx":
-/*!**********************************************!*\
-  !*** ./resources/js/components/UserForm.tsx ***!
-  \**********************************************/
+/***/ "./resources/js/components/user/UserForm.tsx":
+/*!***************************************************!*\
+  !*** ./resources/js/components/user/UserForm.tsx ***!
+  \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -37046,7 +37046,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/errorHandler */ "./resources/js/utils/errorHandler.ts");
+/* harmony import */ var _utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/errorHandler */ "./resources/js/utils/errorHandler.ts");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 var __assign = undefined && undefined.__assign || function () {
   __assign = Object.assign || function (t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -37174,6 +37176,7 @@ var __generator = undefined && undefined.__generator || function (thisArg, body)
 };
 
 
+
 var UserForm = function UserForm(_a) {
   var _b = _a.initialData,
     initialData = _b === void 0 ? {} : _b,
@@ -37194,9 +37197,34 @@ var UserForm = function UserForm(_a) {
   var _f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     loading = _f[0],
     setLoading = _f[1];
-  var _g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(["Author", "Editor", "Subscriber", "Administrator"]),
+  var _g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     availableRoles = _g[0],
     setAvailableRoles = _g[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchRoles = function fetchRoles() {
+      return __awaiter(void 0, void 0, void 0, function () {
+        var data, err_1;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              _a.trys.push([0, 2,, 3]);
+              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default().get('/roles')];
+            case 1:
+              data = _a.sent().data;
+              setAvailableRoles(data.data);
+              return [3 /*break*/, 3];
+            case 2:
+              err_1 = _a.sent();
+              (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__._catchErrors)(err_1);
+              return [3 /*break*/, 3];
+            case 3:
+              return [2 /*return*/];
+          }
+        });
+      });
+    };
+    fetchRoles();
+  }, []);
   var handleInputChange = function handleInputChange(e) {
     var _a = e.target,
       name = _a.name,
@@ -37209,7 +37237,7 @@ var UserForm = function UserForm(_a) {
   };
   var handleRoleChange = function handleRoleChange(e) {
     var selected = Array.from(e.target.selectedOptions, function (option) {
-      return option.value;
+      return Number(option.value);
     });
     setFormData(function (prev) {
       return __assign(__assign({}, prev), {
@@ -37220,7 +37248,7 @@ var UserForm = function UserForm(_a) {
   };
   var handleSubmit = function handleSubmit(e) {
     return __awaiter(void 0, void 0, void 0, function () {
-      var err_1;
+      var err_2;
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
@@ -37235,8 +37263,8 @@ var UserForm = function UserForm(_a) {
             _a.sent();
             return [3 /*break*/, 4];
           case 3:
-            err_1 = _a.sent();
-            (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__._catchErrors)(err_1);
+            err_2 = _a.sent();
+            (0,_utils_errorHandler__WEBPACK_IMPORTED_MODULE_1__._catchErrors)(err_2);
             setLoading(false);
             return [3 /*break*/, 4];
           case 4:
@@ -37283,14 +37311,14 @@ var UserForm = function UserForm(_a) {
     id: "roles",
     name: "roles",
     multiple: true,
-    value: formData.roles,
+    value: formData.roles.map(String),
     onChange: handleRoleChange,
     className: "mt-1 block w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
   }, availableRoles.map(function (role) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      key: role,
-      value: role
-    }, role);
+      key: role.id,
+      value: role.id
+    }, role.name);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
     className: "text-sm text-gray-500 mt-1"
   }, "Hold Ctrl/Cmd to select multiple roles")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -37325,7 +37353,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _components_UserForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/UserForm */ "./resources/js/components/UserForm.tsx");
+/* harmony import */ var _components_user_UserForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/user/UserForm */ "./resources/js/components/user/UserForm.tsx");
 var __awaiter = undefined && undefined.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function (resolve) {
@@ -37472,7 +37500,7 @@ var UserAddPage = function UserAddPage() {
     onClick: function onClick() {
       return history.push("/users");
     }
-  }, "Back to Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_UserForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "Back to Users")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_user_UserForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onSubmit: handleSubmit,
     onCancel: function onCancel() {
       return history.push("/users");
@@ -37755,13 +37783,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   _catchErrors: () => (/* binding */ _catchErrors)
 /* harmony export */ });
 /* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.esm.mjs");
+var __assign = undefined && undefined.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+      for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
 
-;
-/**
- * Global error handler
- * @param error API or Axios error
- * @returns Parsed validation errors (if any) or null
- */
 var _catchErrors = function _catchErrors(error) {
   var _a, _b, _c, _d, _e, _f;
   var errorsData;
@@ -37784,18 +37816,20 @@ var _catchErrors = function _catchErrors(error) {
     });
     return null;
   }
-  // Show all validation errors
+  // Show all validation errors if errorsData is a Record
   if (errorsData && typeof errorsData !== 'string') {
-    Object.keys(errorsData).forEach(function (key) {
-      var first = errorsData[key][0];
-      react_toastify__WEBPACK_IMPORTED_MODULE_0__.toast.error(first, {
-        position: 'top-center'
-      });
-    });
-  }
-  // Return parsed validation errors for further processing
-  if (errorsData && typeof errorsData !== 'string') {
-    return JSON.parse(JSON.stringify(errorsData));
+    for (var key in errorsData) {
+      if (Object.prototype.hasOwnProperty.call(errorsData, key)) {
+        var messages = errorsData[key];
+        if (messages && messages.length > 0) {
+          react_toastify__WEBPACK_IMPORTED_MODULE_0__.toast.error(messages[0], {
+            position: 'top-center'
+          });
+        }
+      }
+    }
+    // Return a shallow copy of errorsData
+    return __assign({}, errorsData);
   }
   return null;
 };

@@ -33,6 +33,22 @@ class UserAddRequest extends FormRequest
         ];
     }
 
+    public function prepareForValidation()
+    {
+        if ($this->has('roles') && is_string($this->roles)){
+            $this->merge([
+                'roles' => collect(explode(',', $this->roles))
+                    ->map(function($item){
+                        return trim($item);
+                    })
+                    ->filter(function($item){
+                        return !empty($item);
+                    })
+                    ->values()
+            ]);
+        }
+    }
+
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([

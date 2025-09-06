@@ -1,12 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import UserForm from "../components/UserForm";
+import UserForm from "../components/user/UserForm";
 
 const UserAddPage: React.FC = () => {
   const history = useHistory();
 
-  const handleSubmit = async (data: { name: string; email: string; roles: string[] }) => {
+  const handleSubmit = async (data: { name: string; email: string; roles: number[] }) => {
     await axios.post("/api/users/add", data);
     history.push("/users");
   };
