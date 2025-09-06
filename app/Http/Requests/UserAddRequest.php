@@ -29,24 +29,7 @@ class UserAddRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'roles' => 'required|array|min:1',
-            'roles.*' => 'in:Author,Editor,Subscriber,Administrator',
         ];
-    }
-
-    public function prepareForValidation()
-    {
-        if ($this->has('roles') && is_string($this->roles)){
-            $this->merge([
-                'roles' => collect(explode(',', $this->roles))
-                    ->map(function($item){
-                        return trim($item);
-                    })
-                    ->filter(function($item){
-                        return !empty($item);
-                    })
-                    ->values()
-            ]);
-        }
     }
 
     protected function failedValidation(Validator $validator)

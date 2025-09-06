@@ -33,8 +33,8 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
   useEffect(() => {
     const fetchRoles = async() => {
       try {
-        const {data} = await axios.get('/roles');
-        setAvailableRoles(data.data)
+        const response = await axios.get('/api/roles');
+        setAvailableRoles(response.data.data || []);
       } catch (err: any) {
         _catchErrors(err);
       }

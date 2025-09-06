@@ -63,7 +63,7 @@ const DataTable = <T extends { id: number | string; name?: string; title?: strin
                   {tableData.headers.map((col) => (
                     <td key={col.key} className="px-4 py-2">
                       {col.key !== "actions" ? (
-                        renderColumn ? renderColumn(col.key, item) : item[col.key] ?? "N/A"
+                        renderColumn ? renderColumn(col.key, item) : (item as Record<string, any>)[col.key] ?? "N/A"
                       ) : (
                         <div className="flex gap-2">
                           <button

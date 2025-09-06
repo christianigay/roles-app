@@ -14,6 +14,7 @@
 - ./vendor/bin/sail artisan ui react or with optional --auth
 - sail composer install or ./vendor/bin/sail composer install
 - sail npm install or ./vendor/bin/sail npm install
+- ./vendor/bin/sail artisan db:seed --class=RoleSeeder
 - sail npm run watch or ./vendor/bin/sail npm run watch
 - Open http://localhost:8701 or http://127.0.0.1:8701
 

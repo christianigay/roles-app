@@ -2,7 +2,6 @@
 namespace App\Repositories;
 
 use App\Models\Role;
-use App\Models\User;
 
 class RoleRepository extends BaseRepository
 {
@@ -15,7 +14,7 @@ class RoleRepository extends BaseRepository
 
     public function fetchAll()
     {
-        $this->query = User::query();
+        $this->query = Role::query();
         $this->sortBy();
         return $this->returnData();
     }

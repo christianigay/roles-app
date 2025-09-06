@@ -37203,15 +37203,15 @@ var UserForm = function UserForm(_a) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchRoles = function fetchRoles() {
       return __awaiter(void 0, void 0, void 0, function () {
-        var data, err_1;
+        var response, err_1;
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
               _a.trys.push([0, 2,, 3]);
-              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default().get('/roles')];
+              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/roles')];
             case 1:
-              data = _a.sent().data;
-              setAvailableRoles(data.data);
+              response = _a.sent();
+              setAvailableRoles(response.data.data || []);
               return [3 /*break*/, 3];
             case 2:
               err_1 = _a.sent();
