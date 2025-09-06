@@ -104,7 +104,6 @@ const UserForm: React.FC<UserFormProps> = ({ initialData, onSubmit, onCancel, is
                 key={role.id}
                 type="button"
                 onClick={() => {
-                  // Toggle role selection
                   setFormData((prev) => {
                     const roles = prev.roles.includes(role.id)
                       ? prev.roles.filter((r) => r !== role.id)

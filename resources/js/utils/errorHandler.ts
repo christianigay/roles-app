@@ -13,25 +13,21 @@ interface ApiError {
 export const _catchErrors = (error: ApiError): Record<string, string[]> | null => {
   let errorsData: Record<string, string[]> | string | undefined;
 
-  // Validation errors
   if (error.response?.data?.errors) {
     errorsData = error.response.data.errors;
   }
 
-  // Generic error_key
   if (error.response?.data?.error_key) {
     toast.error(error.response.data.error_key.replace('_', ' '), { position: 'top-center' });
     return null;
   }
 
-  // Generic error
   if (error.response?.data?.error) {
     errorsData = error.response.data.error.replace('_', ' ');
     toast.error(errorsData, { position: 'top-center' });
     return null;
   }
 
-  // Show all validation errors if errorsData is a Record
   if (errorsData && typeof errorsData !== 'string') {
     for (const key in errorsData) {
       if (Object.prototype.hasOwnProperty.call(errorsData, key)) {
@@ -42,7 +38,6 @@ export const _catchErrors = (error: ApiError): Record<string, string[]> | null =
       }
     }
 
-    // Return a shallow copy of errorsData
     return { ...errorsData };
   }
 

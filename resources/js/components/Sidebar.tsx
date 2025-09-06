@@ -8,7 +8,6 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, closeSidebar }) => {
   const handleLogout = () => {
-    // Placeholder logout function (customize as needed)
     closeSidebar();
   };
 

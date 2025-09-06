@@ -5,7 +5,6 @@ import UserForm from "../components/user/UserForm";
 import { _catchErrors } from "../utils/errorHandler";
 import { UserData } from "../components/user/types/UserData";
 
-
 interface RouteParams {
   id: string;
 }

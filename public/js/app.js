@@ -36794,7 +36794,6 @@ __webpack_require__.r(__webpack_exports__);
 var DataTable = function DataTable(_a) {
   var tableData = _a.tableData,
     onEditItem = _a.onEditItem,
-    onDeleteItem = _a.onDeleteItem,
     renderColumn = _a.renderColumn,
     children = _a.children;
   if (!tableData || !tableData.headers || !tableData.tableItems) {
@@ -36977,7 +36976,6 @@ var Sidebar = function Sidebar(_a) {
   var isOpen = _a.isOpen,
     closeSidebar = _a.closeSidebar;
   var handleLogout = function handleLogout() {
-    // Placeholder logout function (customize as needed)
     closeSidebar();
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -37309,7 +37307,6 @@ var UserForm = function UserForm(_a) {
       key: role.id,
       type: "button",
       onClick: function onClick() {
-        // Toggle role selection
         setFormData(function (prev) {
           var roles = prev.roles.includes(role.id) ? prev.roles.filter(function (r) {
             return r !== role.id;
@@ -37990,13 +37987,6 @@ var UsersPage = function UsersPage() {
   var handleEditItem = function handleEditItem(item) {
     history.push("/user/edit/".concat(item.id));
   };
-  var handleRoleChange = function handleRoleChange(event) {
-    var selected = Array.from(event.target.selectedOptions, function (option) {
-      return Number(option.value);
-    });
-    setSelectedRoles(selected);
-    setPage(1);
-  };
   var tableData = {
     headers: [{
       key: "id",
@@ -38103,18 +38093,15 @@ var __assign = undefined && undefined.__assign || function () {
 var _catchErrors = function _catchErrors(error) {
   var _a, _b, _c, _d, _e, _f;
   var errorsData;
-  // Validation errors
   if ((_b = (_a = error.response) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.errors) {
     errorsData = error.response.data.errors;
   }
-  // Generic error_key
   if ((_d = (_c = error.response) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.error_key) {
     react_toastify__WEBPACK_IMPORTED_MODULE_0__.toast.error(error.response.data.error_key.replace('_', ' '), {
       position: 'top-center'
     });
     return null;
   }
-  // Generic error
   if ((_f = (_e = error.response) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.error) {
     errorsData = error.response.data.error.replace('_', ' ');
     react_toastify__WEBPACK_IMPORTED_MODULE_0__.toast.error(errorsData, {
@@ -38122,7 +38109,6 @@ var _catchErrors = function _catchErrors(error) {
     });
     return null;
   }
-  // Show all validation errors if errorsData is a Record
   if (errorsData && typeof errorsData !== 'string') {
     for (var key in errorsData) {
       if (Object.prototype.hasOwnProperty.call(errorsData, key)) {
@@ -38134,7 +38120,6 @@ var _catchErrors = function _catchErrors(error) {
         }
       }
     }
-    // Return a shallow copy of errorsData
     return __assign({}, errorsData);
   }
   return null;

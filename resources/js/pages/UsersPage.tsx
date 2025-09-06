@@ -72,14 +72,6 @@ const UsersPage: React.FC = () => {
 		history.push(`/user/edit/${item.id}`);
 	};
 
-	const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = Array.from(event.target.selectedOptions, (option) =>
-      Number(option.value)
-    );
-    setSelectedRoles(selected);
-    setPage(1);
-  };
-
 	const tableData = {
 		headers: [
       { key: "id", title: "ID"},
