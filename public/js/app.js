@@ -37174,6 +37174,15 @@ var __generator = undefined && undefined.__generator || function (thisArg, body)
     };
   }
 };
+var __spreadArray = undefined && undefined.__spreadArray || function (to, from, pack) {
+  if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+    if (ar || !(i in from)) {
+      if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+      ar[i] = from[i];
+    }
+  }
+  return to.concat(ar || Array.prototype.slice.call(from));
+};
 
 
 
@@ -37305,23 +37314,30 @@ var UserForm = function UserForm(_a) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mb-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    htmlFor: "roles",
-    className: "block text-sm font-medium text-gray-700"
-  }, "Roles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-    id: "roles",
-    name: "roles",
-    multiple: true,
-    value: formData.roles.map(String),
-    onChange: handleRoleChange,
-    className: "mt-1 block w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
+    className: "block text-sm font-medium text-gray-700 mb-2"
+  }, "Roles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "grid grid-cols-2 gap-3"
   }, availableRoles.map(function (role) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+    var isSelected = formData.roles.includes(role.id);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       key: role.id,
-      value: role.id
+      type: "button",
+      onClick: function onClick() {
+        // Toggle role selection
+        setFormData(function (prev) {
+          var roles = prev.roles.includes(role.id) ? prev.roles.filter(function (r) {
+            return r !== role.id;
+          }) : __spreadArray(__spreadArray([], prev.roles, true), [role.id], false);
+          return __assign(__assign({}, prev), {
+            roles: roles
+          });
+        });
+      },
+      className: "flex items-center justify-center px-4 py-2 rounded-lg border font-medium text-sm transition-colors ".concat(isSelected ? "bg-green-600 text-white border-green-600" : "bg-white text-gray-700 border-gray-300 hover:bg-green-100")
     }, role.name);
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-    className: "text-sm text-gray-500 mt-1"
-  }, "Hold Ctrl/Cmd to select multiple roles")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "text-sm text-gray-500 mt-2"
+  }, "Click to select/deselect roles")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "flex justify-end gap-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
@@ -37723,8 +37739,8 @@ var UsersPage = function UsersPage() {
       title: "Email",
       sortable: true
     }, {
-      key: "created_at",
-      title: "Created At",
+      key: "roles",
+      title: "Roles",
       sortable: true
     }, {
       key: "actions",
@@ -37762,6 +37778,9 @@ var UsersPage = function UsersPage() {
           href: "mailto:".concat(item.email),
           className: "text-blue-600"
         }, item.email);
+      }
+      if (key === "roles") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, item.display_roles);
       }
       return item[key];
     }

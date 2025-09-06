@@ -19,7 +19,7 @@ class RoleRepository extends BaseRepository
         return $this->returnData();
     }
 
-    public function sortBy()
+    private function sortBy()
     {
         if(Request()->sort_by){
             $filters = explode('/', Request()->sort_by);

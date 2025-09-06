@@ -42,6 +42,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'display_roles'
+    ];
+
+    public function getDisplayRolesAttribute()
+    {
+        if(! $this->roles) return;
+        return $this->roles->map(function($item){
+            return $item->name;
+        })->join(', ');
+    }
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);

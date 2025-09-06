@@ -19,8 +19,7 @@ class UserController extends Controller
     
     public function index() 
     {
-        $users = User::all(['id', 'name', 'email']);
-        return response()->json($users);
+        return $this->repo->search();
     }
 
     public function store(UserAddRequest $request)

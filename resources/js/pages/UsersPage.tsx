@@ -65,7 +65,7 @@ const UsersPage: React.FC = () => {
       { key: "id", title: "ID", sortable: true },
       { key: "name", title: "Name", sortable: true },
       { key: "email", title: "Email", sortable: true },
-      { key: "created_at", title: "Created At", sortable: true },
+      { key: "roles", title: "Roles", sortable: true },
       { key: "actions", title: "Actions", sortable: false },
     ],
 		tableItems: users,
@@ -99,7 +99,11 @@ const UsersPage: React.FC = () => {
 				onDeleteItem={handleDeleteItem}
 				renderColumn={(key, item) => {
 					if (key === "email") {
-							return <a href={`mailto:${item.email}`} className="text-blue-600">{item.email}</a>;
+						return <a href={`mailto:${item.email}`} className="text-blue-600">{item.email}</a>;
+					}
+
+					if (key === "roles") {
+						return <div>{item.display_roles}</div>
 					}
 					return item[key];
 				}}

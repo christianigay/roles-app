@@ -99,25 +99,40 @@ const UserForm: React.FC<UserFormProps> = ({ initialData = {}, onSubmit, onCance
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="roles" className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
           Roles
         </label>
-        <select
-          id="roles"
-          name="roles"
-          multiple
-          value={formData.roles.map(String)}
-          onChange={handleRoleChange}
-          className="mt-1 block w-full border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-600"
-        >
-          {availableRoles.map((role) => (
-            <option key={role.id} value={role.id}>
-              {role.name}
-            </option>
-          ))}
-        </select>
-        <p className="text-sm text-gray-500 mt-1">Hold Ctrl/Cmd to select multiple roles</p>
+        <div className="grid grid-cols-2 gap-3">
+          {availableRoles.map((role) => {
+            const isSelected = formData.roles.includes(role.id);
+            return (
+              <button
+                key={role.id}
+                type="button"
+                onClick={() => {
+                  // Toggle role selection
+                  setFormData((prev) => {
+                    const roles = prev.roles.includes(role.id)
+                      ? prev.roles.filter((r) => r !== role.id)
+                      : [...prev.roles, role.id];
+                    return { ...prev, roles };
+                  });
+                }}
+                className={`flex items-center justify-center px-4 py-2 rounded-lg border font-medium text-sm transition-colors ${
+                  isSelected
+                    ? "bg-green-600 text-white border-green-600"
+                    : "bg-white text-gray-700 border-gray-300 hover:bg-green-100"
+                }`}
+              >
+                {role.name}
+              </button>
+            );
+          })}
+        </div>
+        <p className="text-sm text-gray-500 mt-2">Click to select/deselect roles</p>
       </div>
+
+
       <div className="flex justify-end gap-2">
         <button
           type="button"
