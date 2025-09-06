@@ -37886,6 +37886,15 @@ var __generator = undefined && undefined.__generator || function (thisArg, body)
     };
   }
 };
+var __spreadArray = undefined && undefined.__spreadArray || function (to, from, pack) {
+  if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+    if (ar || !(i in from)) {
+      if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+      ar[i] = from[i];
+    }
+  }
+  return to.concat(ar || Array.prototype.slice.call(from));
+};
 
 
 
@@ -37910,10 +37919,41 @@ var UsersPage = function UsersPage() {
   var _f = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     totalItems = _f[0],
     setTotalItems = _f[1];
+  var _g = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    roles = _g[0],
+    setRoles = _g[1];
+  var _h = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    selectedRoles = _h[0],
+    setSelectedRoles = _h[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchRoles = function fetchRoles() {
+      return __awaiter(void 0, void 0, void 0, function () {
+        var response, err_1;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              _a.trys.push([0, 2,, 3]);
+              return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/roles")];
+            case 1:
+              response = _a.sent();
+              setRoles(response.data.data || []);
+              return [3 /*break*/, 3];
+            case 2:
+              err_1 = _a.sent();
+              console.error("Failed to fetch roles", err_1);
+              return [3 /*break*/, 3];
+            case 3:
+              return [2 /*return*/];
+          }
+        });
+      });
+    };
+    fetchRoles();
+  }, []);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var fetchUsers = function fetchUsers() {
       return __awaiter(void 0, void 0, void 0, function () {
-        var response, err_1;
+        var response, err_2;
         return __generator(this, function (_a) {
           switch (_a.label) {
             case 0:
@@ -37921,7 +37961,8 @@ var UsersPage = function UsersPage() {
               return [4 /*yield*/, axios__WEBPACK_IMPORTED_MODULE_2___default().get("/api/users", {
                 params: {
                   page: page,
-                  per_page: itemsPerPage
+                  per_page: itemsPerPage,
+                  roles: selectedRoles.join(",")
                 }
               })];
             case 1:
@@ -37931,7 +37972,7 @@ var UsersPage = function UsersPage() {
               setLoading(false);
               return [3 /*break*/, 3];
             case 2:
-              err_1 = _a.sent();
+              err_2 = _a.sent();
               setError("Failed to fetch users");
               setLoading(false);
               return [3 /*break*/, 3];
@@ -37942,35 +37983,36 @@ var UsersPage = function UsersPage() {
       });
     };
     fetchUsers();
-  }, [page, itemsPerPage]);
+  }, [page, itemsPerPage, selectedRoles]);
   var handleAddUser = function handleAddUser() {
     history.push("/user/add");
   };
   var handleEditItem = function handleEditItem(item) {
     history.push("/user/edit/".concat(item.id));
   };
-  var handleDeleteItem = function handleDeleteItem(item) {};
+  var handleRoleChange = function handleRoleChange(event) {
+    var selected = Array.from(event.target.selectedOptions, function (option) {
+      return Number(option.value);
+    });
+    setSelectedRoles(selected);
+    setPage(1);
+  };
   var tableData = {
     headers: [{
       key: "id",
-      title: "ID",
-      sortable: true
+      title: "ID"
     }, {
       key: "name",
-      title: "Name",
-      sortable: true
+      title: "Name"
     }, {
       key: "email",
-      title: "Email",
-      sortable: true
+      title: "Email"
     }, {
       key: "roles",
-      title: "Roles",
-      sortable: true
+      title: "Roles"
     }, {
       key: "actions",
-      title: "Actions",
-      sortable: false
+      title: "Actions"
     }],
     tableItems: users
   };
@@ -37987,16 +38029,36 @@ var UsersPage = function UsersPage() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "max-w-6xl mx-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "flex justify-between items-center mb-4"
+    className: "flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
     className: "text-2xl font-bold"
-  }, "Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    className: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700",
+  }, "Users"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex flex-col sm:flex-row sm:items-center gap-4 w-full sm:w-auto"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: "block text-sm font-medium text-gray-700 mb-2"
+  }, "Filter by Roles"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "flex flex-wrap gap-2"
+  }, roles.map(function (role) {
+    var isSelected = selectedRoles.includes(role.id);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      key: role.id,
+      onClick: function onClick() {
+        setSelectedRoles(function (prev) {
+          return prev.includes(role.id) ? prev.filter(function (r) {
+            return r !== role.id;
+          }) // remove if selected
+          : __spreadArray(__spreadArray([], prev, true), [role.id], false);
+        } // add if not selected
+        );
+      },
+      className: "px-3 py-1 rounded-md text-sm border transition ".concat(isSelected ? "bg-blue-600 text-white border-blue-600" : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200")
+    }, role.name);
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    className: "px-3 py-1 rounded-md text-sm bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 self-start",
     onClick: handleAddUser
-  }, "Add User")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_DataTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "Add User"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_DataTable__WEBPACK_IMPORTED_MODULE_3__["default"], {
     tableData: tableData,
     onEditItem: handleEditItem,
-    onDeleteItem: handleDeleteItem,
     renderColumn: function renderColumn(key, item) {
       if (key === "email") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {

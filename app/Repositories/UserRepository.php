@@ -21,8 +21,19 @@ class UserRepository extends BaseRepository
     public function search()
     {
         $this->query = User::query();
+        $this->searchByRoles();
         $this->sortBy();
         return $this->returnData();
+    }
+
+    private function searchByRoles()
+    {
+        if(Request()->roles) {
+            $this->query->whereHas('roles', function($query){
+                $ids = explode(',', Request()->roles);
+                $query->whereIn('roles.id', $ids);
+            });
+        }
     }
 
     private function sortBy()

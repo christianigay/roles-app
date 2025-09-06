@@ -2,6 +2,7 @@
 
 - clone repo https://github.com/christianigay/roles-app.git
 - cd roles-app
+- php 8.0 node 18.20.8
 - chmod +x docker/start-container.sh
 - ls /usr/bin/php*
 - If no php 8.0 installed. Install PHP 8.0 command sh php_script.sh and enter type 8.0 as php version
